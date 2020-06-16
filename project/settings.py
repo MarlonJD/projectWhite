@@ -35,9 +35,9 @@ except KeyError:
     # Change this
 
 if DEBUG:
-    ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+    ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'kkspro.de']
 else:
-    ALLOWED_HOSTS = ['.herokuapp.com', ]
+    ALLOWED_HOSTS = ['.herokuapp.com', 'kkspro.de']
 
 
 # Application definition
@@ -157,6 +157,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 # Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
