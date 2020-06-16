@@ -18,7 +18,7 @@
 		  <th scope="col">{% trans "Price" %}</th>
 		  <th scope="col">{% trans "Last Modification" %}</th>
 		<th scope="col">{% trans "Quantity" %}</th>
-                <th scope="col">{% trans "Action" %}</th>
+                <!-- <th scope="col">{% trans "Action" %}</th> -->
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -28,9 +28,9 @@
 		    <td>{{ stock.product.price }}€</td>
 		    <td>{{ stock.last_mod|date }}</td>
 		    <td>{{ stock.quantity }}</td>
-                <td>
-		  <a class="btn btn-sm btn-outline-info" href="/stock/{{ stock.pk }}/"><i class="fas fa-eye"></i></a>
-                </td>
+                    <!-- <td>
+			 <a class="btn btn-sm btn-outline-info" href="/stock/{{ stock.pk }}/"><i class="fas fa-eye"></i></a>
+			 </td> -->
 	      </tr>
 	      {% endfor %}
 	    </tbody>

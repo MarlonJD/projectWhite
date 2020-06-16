@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-16 01:53+0000\n"
+"POT-Creation-Date: 2020-06-16 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,98 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: api/views.py:20
+msgid "Product does not exist"
+msgstr ""
+
 #: main/models.py:18
 msgid "Stock"
-msgstr "Bestandsmenge"
+msgstr "Stok"
 
 #: main/models.py:19 templates/main/index.html:9
 msgid "Stocks"
-msgstr "Lagermengen"
+msgstr "Stoklar"
 
-#: main/models.py:44
+#: main/models.py:44 templates/main/stock_change.html:13
 msgid "Product"
-msgstr "Produkt"
+msgstr "Ürün"
 
 #: main/models.py:45
 msgid "Products"
-msgstr "Produkte"
+msgstr "Ürünler"
 
 #: project/settings.py:142
 msgid "English"
 msgstr ""
 
 #: project/settings.py:143
-msgid "German"
+msgid "Türkçe"
 msgstr ""
 
 #: templates/main/_navbar.html:13
 msgid "Home"
-msgstr "Startseite"
+msgstr "Anasayfa"
 
 #: templates/main/_navbar.html:16
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Ekle"
 
 #: templates/main/index.html:14
 msgid "List of stocks"
-msgstr "Liste der Bestandsmengen"
+msgstr "Stok listesi"
 
-#: templates/main/index.html:17
+#: templates/main/index.html:17 templates/main/stock_change.html:26
 msgid "Name"
-msgstr "Name"
+msgstr "İsim"
 
-#: templates/main/index.html:18
+#: templates/main/index.html:18 templates/main/stock_change.html:27
 msgid "Price"
-msgstr "Preis"
+msgstr "Fiyat"
 
 #: templates/main/index.html:19
 msgid "Last Modification"
-msgstr "Letzte Änderung"
+msgstr "Son Düzenleme"
 
-#: templates/main/index.html:20
+#: templates/main/index.html:20 templates/main/stock_change.html:28
 msgid "Quantity"
-msgstr "Menge"
+msgstr "Miktar"
 
 #: templates/main/index.html:21
 msgid "Action"
-msgstr "Aktion"
+msgstr "Eylem"
+
+#: templates/main/stock_change.html:9
+msgid "Change Stock"
+msgstr "Stok Değiştirin"
+
+#: templates/main/stock_change.html:20 templates/main/stock_change.html:21
+msgid "Search Product"
+msgstr "Ürün arayın"
+
+#: templates/main/stock_change.html:25
+msgid "Product Details"
+msgstr "Ürün Detayları"
+
+#: templates/main/stock_change.html:32
+msgid "Change Quantity"
+msgstr "Miktar Değiştirin"
+
+#: templates/main/stock_change.html:33
+msgid "Type Quantity"
+msgstr "Miktar Girin"
+
+#: templates/main/stock_change.html:37
+msgid "Clear Form"
+msgstr "Formu Temizle"
+
+#: templates/main/stock_change.html:38
+msgid "Decrease"
+msgstr "Azalt"
+
+#: templates/main/stock_change.html:39
+msgid "Increase"
+msgstr "Arttır"
+
+#: templates/main/stock_change.html:111 templates/main/stock_change.html:125
+msgid "Item quantity successfully changed"
+msgstr "Ürün miktarı başarıyla değiştirildi."

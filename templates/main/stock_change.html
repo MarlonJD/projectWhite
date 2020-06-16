@@ -6,35 +6,38 @@
 <div class="container" id="vue" v-cloak>
     <div class="row">
 	<div class="col-12">
-	    <h1>Add Stock</h1>
+	    <h1>{% trans "Change Stock" %}</h1>
 	    <form class="pt-4">
 		<div class="form-row">
 		    <div class="col-12">
-			<label>Product</label>
+			<label>{% trans "Product" %}</label>
 			<vue-bootstrap-typeahead
 			    :data="products"
 			    :serializer="s => s.name"
 			    v-model="product_search"
 			    @hit="product = $event.id"
 			    input-class="form-control"
-			    aria-describedby="Search Product"
-			    placeholder="Search Product"
+			    aria-describedby="{% trans "Search Product" %}"
+			    placeholder="{% trans "Search Product" %}"
 			/>
 		    </div>
 		    <div class="col-12 pt-2" v-if="product_detail.name">
-			<h5>Product Details</h5>
-			<p><strong>Name: </strong>[[ product_detail.name ]]</p>
-			<p><strong>Price: </strong>[[ product_detail.price ]] €</p>
-			<p><strong>Quantity: </strong>[[ quantity ]]</p>
+			<h5>{% trans "Product Details" %}</h5>
+			<p><strong>{% trans "Name" %}: </strong>[[ product_detail.name ]]</p>
+			<p><strong>{% trans "Price" %}: </strong>[[ product_detail.price ]] €</p>
+			<p><strong>{% trans "Quantity" %}: </strong>[[ quantity ]]</p>
 		    </div>
 		    
 		    <div class="col-12 pt-2">
-			<label>Change Quantity</label>
-			<input type="number" class="form-control" placeholder="Type Quantity" value="0">
+			<label>{% trans "Change Quantity" %}</label>
+			<input type="number" class="form-control" v-model="new_quantity" placeholder="{% trans "Type Quantity" %}" value="0">
 		    </div>
 		    <div class="col-12 mt-4">
-			<a class="col-12 col-md-3 form-control float-right btn btn-outline-success"><i class="fas fa-arrow-up"></i> Increase</a>
-			<a class="col-12 col-md-3 mr-4 form-control float-right btn btn-outline-warning"><i class="fas fa-arrow-down"></i> Decrease</a>
+			<div class="row">
+			    <a class="col-4 form-control float-right btn btn-outline-danger" @click="clear"><i class="fas fa-trash-alt"></i> {% trans "Clear Form" %}</a>
+			    <a class="col-4 form-control float-right btn btn-outline-warning" @click="decrease"><i class="fas fa-arrow-down"></i> {% trans "Decrease" %}</a>
+			    <a class="col-4 form-control float-right btn btn-outline-success" @click="increase"><i class="fas fa-arrow-up"></i> {% trans "Increase" %}</a>
+			</div>
 		    </div>
 		</div>
 	    </form>
@@ -65,6 +68,8 @@
 	 product: null,
 	 product_detail: {},
 	 quantity: null,
+	 new_quantity: 0,
+	 stock_id: null
      },
      methods: {
 	 async getAddresses4Game(query) {
@@ -79,6 +84,7 @@
 		 .get('/api/stockFromProduct/' + this.product + '/')
 		 .then(response => {
 		     this.quantity = response.data.quantity
+		     this.stock_id = response.data.id
 		 })
 		 .catch(error => {
 		     console.log("There is an error");
@@ -94,6 +100,44 @@
 		     console.log("There is an error");
 		 })
 	     this.getStock()
+	 },
+	 decrease() {
+	     axios
+		 .patch('/api/stock/' + this.stock_id + '/',
+			{
+			    quantity: (parseInt(this.quantity) - parseInt(this.new_quantity))
+			})
+		 .then(response => {
+		     main.makeToast(title="Success", variant = 'success', m_body="{% trans "Item quantity successfully changed" %}")
+		     this.getProduct()
+		 })
+		 .catch(error => {
+		     console.log("There is an error");
+		 })
+	 },
+	 increase() {
+	     axios
+		 .patch('/api/stock/' + this.stock_id + '/',
+			{
+			    quantity: (parseInt(this.quantity) + parseInt(this.new_quantity))
+			})
+		 .then(response => {
+		     main.makeToast(title="Success", variant = 'success', m_body="{% trans "Item quantity successfully changed" %}");
+		     this.getProduct();
+		     this.new_quantity = 0;
+		 })
+		 .catch(error => {
+		     console.log("There is an error");
+		 })
+	 },
+	 clear() {
+	     this.product_search = null
+	     this.products = []
+	     this.product = null
+	     this.product_detail = {}
+	     this.quantity = null
+	     this.new_quantity = 0
+	     this.stock_id = null
 	 },
 	 toggleNavbar() {
 	     this.show = !this.show;

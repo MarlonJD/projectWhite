@@ -34,7 +34,7 @@
 	    {% include 'main/_navbar.html' %}    
 	</header>
 
-	<main class="pt-4">
+	<main class="pt-4" id="main">
 	    {% block content %}
 	    {% endblock %}
 	</main>
@@ -76,6 +76,13 @@
 		 },
 		 goToGame(addr) {
 		     window.location.href = "/" + addr
+		 },
+		 makeToast(title=null, variant = null, m_body=null) {
+		     this.$bvToast.toast(m_body, {
+			 title: title,
+			 variant: variant,
+			 solid: true
+		     })
 		 }
 	     },
 	     computed: {
