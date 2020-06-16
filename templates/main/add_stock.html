@@ -1,0 +1,16 @@
+{% extends 'main/_layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+	<div class="col-12">
+	    <h1>Add Stock</h1>
+	    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+		{{ form|crispy }}
+		<input class="col-12 col-md-3 form-control float-right btn btn-success" type="submit" value="Save">
+	    </form>
+	</div>
+    </div>
+</div>
+{% endblock %}

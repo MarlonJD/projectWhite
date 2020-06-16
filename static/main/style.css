@@ -1,0 +1,143 @@
+.bg-card {
+    /**background-color: #dc35451f !important;**/
+    background-color: #F3F8FE;
+}
+
+.bg-seemore-card {
+    /**background-color: #dc35451f !important;**/
+    background-color: #F3FFFE;
+}
+
+.bg-game-card {
+    /**background-color: #F3F8FE;**/
+    background-color: #FFF;
+}
+
+.bg-search-box {
+    background-color: #035FF0;
+}
+
+.bg-custom-navbar {
+    background-color: #2C79F2;
+}
+
+.bg-fail-test {
+    background-color: #FFBABA;
+}
+
+.bg-success-test {
+    background-color: #BAFFBA;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.75rem;
+}
+
+h6 {
+    font-size: 0.5rem;
+}
+
+.comment {
+    font-size: 0.75rem;
+}
+
+.username {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.card-normalizer, .card-normalizer:hover {
+  color: #000;
+  text-decoration: none !important;
+}
+
+.card-normalizer:hover > .card {
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.antispam {
+    display: none;
+}
+
+.comment-disp {
+    display: none;
+}
+
+.visit-count {
+    font-size: 0.75rem;
+}
+
+.game-desc {
+    font-size: 0.79rem;
+}
+
+.game-title {
+    color: #17a2b8;
+}
+
+body.with-cookie-bar {
+    padding-top: 35px;
+}
+.cookie-bar {
+    position: fixed;
+    width: 100%;
+    top:0;
+    text-align:center;
+    height:25px;
+    line-height: 25px;
+    background: #eee;
+}
+
+.paragraf {
+    font-size: 1rem;
+}
+
+.display-5 {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+#autocomplete {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.autocomplete-result {
+  border-top: 1px solid #eee;
+  padding: 16px;
+  background: transparent;
+}
+
+.wiki-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

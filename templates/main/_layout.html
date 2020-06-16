@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="utf-8" />
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="theme-color" content="#2C79F2">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2C79F2">
+	<meta name="yandex-verification" content="065ba182ae4e9d81" />
+	<meta name="msvalidate.01" content="D2F178DFEC73F16A8B7408B0E3B8B955" />
+	{% block metaTags %}
+	{% endblock %}
+
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+	<link type="text/css" rel="stylesheet" href="{% static 'main/style.css' %}"/>
+
+	<!-- Load polyfills to support older browsers -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+	<!-- Required scripts -->
+	<script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" data-cfasync="false"></script>
+    </head>
+    <body class="bg-light">
+	<header id="main">
+	    {% include 'main/_navbar.html' %}    
+	</header>
+
+	<main class="pt-4">
+	    {% block content %}
+	    {% endblock %}
+	</main>
+
+        <div class="container pt-4">
+	    {% include 'main/_footer.html' %}
+        </div>
+	
+	<link href="https://unpkg.com/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.css" rel="stylesheet">
+	<script src="https://unpkg.com/vue-bootstrap-typeahead"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+
+	<script>
+	 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
+	 const GAMES_API_URL = '/api/loadGames/:query/'
+	 
+	 axios.defaults.xsrfCookieName = 'csrftoken';
+	 axios.defaults.xsrfHeaderName = "X-CSRFToken";
+	 axios.defaults.withCredentials = true;
+
+         var main = new Vue({
+	     delimiters: ['[[', ']]'],
+	     el: '#main',
+	     data: {
+		 game_search: null,
+		 show: false,
+		 games: [],
+		 searchlink: '',
+	     },
+	     methods: {
+		 async getAddresses4Game(query) {
+		     const res = await fetch(GAMES_API_URL.replace(':query', query))
+		     const suggestions = await res.json()
+		     this.games = suggestions
+		 },
+		 toggleNavbar() {
+		     this.show = !this.show;
+		 },
+		 goToGame(addr) {
+		     window.location.href = "/" + addr
+		 }
+	     },
+	     computed: {
+		 
+	     },
+	     watch: {
+		 game_search: _.debounce(function(addr) { this.getAddresses4Game(addr) }, 500),
+		 searchlink: _.debounce(function(addr) { this.goToGame(addr) }, 500)
+	     }
+	 });
+	</script>
+
+	{% block script %}
+	{% endblock %}
+    </body>
+</html>

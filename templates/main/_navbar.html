@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<div id="main" v-cloak>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info" v-bind:class=" { 'navbarOpen': show }">
+	<a class="navbar-brand" href="/">Test</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" v-on:click="toggleNavbar">
+	    <span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<div class="collapse navbar-collapse" id="navbarSupportedContent" v-bind:class="{ 'show': show }">
+	    <ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+		    <a class="nav-link" href="{% url 'main:index' %}"><i class="fas fa-fire"></i> {% trans "Home" %}</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="{% url 'main:stock-change' %}"><i class="fas fa-weight-hanging"></i> {% trans "Add" %}</a>
+		</li>	
+		{% if user.is_authenticated %}
+		<b-dropdown variant="link" toggle-class="nav-link" no-caret>
+		    <template slot="button-content"><i class="fas fa-user-circle"></i> {{ user.username }} <i class="fas fa-chevron-down text-minify"></i></template>
+
+		    <b-dropdown-header id="dropdown-header-2">User</b-dropdown-header>
+		    <b-dropdown-item href="{% url 'logout' %}" aria-describedby="dropdown-header-2">Logout</b-dropdown-item>
+		    <b-dropdown-divider></b-dropdown-divider>
+
+		    {% if user.is_superuser %}
+		    <b-dropdown-header id="dropdown-header-1">Admin</b-dropdown-header>
+		    <b-dropdown-item href="/admin" aria-describedby="dropdown-header-1">Admin Panel</b-dropdown-item>
+		    <b-dropdown-divider></b-dropdown-divider>
+		    {% endif %}
+		</b-dropdown>
+		{% endif %}
+	    </ul>
+	</div>
+    </nav>
+</div>

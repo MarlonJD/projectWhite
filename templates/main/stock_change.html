@@ -1,0 +1,111 @@
+{% extends 'main/_layout.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+<div class="container" id="vue" v-cloak>
+    <div class="row">
+	<div class="col-12">
+	    <h1>Add Stock</h1>
+	    <form class="pt-4">
+		<div class="form-row">
+		    <div class="col-12">
+			<label>Product</label>
+			<vue-bootstrap-typeahead
+			    :data="products"
+			    :serializer="s => s.name"
+			    v-model="product_search"
+			    @hit="product = $event.id"
+			    input-class="form-control"
+			    aria-describedby="Search Product"
+			    placeholder="Search Product"
+			/>
+		    </div>
+		    <div class="col-12 pt-2" v-if="product_detail.name">
+			<h5>Product Details</h5>
+			<p><strong>Name: </strong>[[ product_detail.name ]]</p>
+			<p><strong>Price: </strong>[[ product_detail.price ]] €</p>
+			<p><strong>Quantity: </strong>[[ quantity ]]</p>
+		    </div>
+		    
+		    <div class="col-12 pt-2">
+			<label>Change Quantity</label>
+			<input type="number" class="form-control" placeholder="Type Quantity" value="0">
+		    </div>
+		    <div class="col-12 mt-4">
+			<a class="col-12 col-md-3 form-control float-right btn btn-outline-success"><i class="fas fa-arrow-up"></i> Increase</a>
+			<a class="col-12 col-md-3 mr-4 form-control float-right btn btn-outline-warning"><i class="fas fa-arrow-down"></i> Decrease</a>
+		    </div>
+		</div>
+	    </form>
+	</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<link href="https://unpkg.com/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.css" rel="stylesheet">
+<script src="https://unpkg.com/vue-bootstrap-typeahead"></script>
+<script>
+ Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
+ const PRODUCT_API_URL = '/api/loadProduct/:query/'
+ 
+ axios.defaults.xsrfCookieName = 'csrftoken';
+ axios.defaults.xsrfHeaderName = "X-CSRFToken";
+ axios.defaults.withCredentials = true;
+
+ var app = new Vue({
+     delimiters: ['[[', ']]'],
+     el: '#vue',
+     data: {
+	 product_search: null,
+	 show: false,
+	 products: [],
+	 product: null,
+	 product_detail: {},
+	 quantity: null,
+     },
+     methods: {
+	 async getAddresses4Game(query) {
+	     if (this.product_search.length > 1) {
+		 const res = await fetch(PRODUCT_API_URL.replace(':query', query))
+		 const suggestions = await res.json()
+		 this.products = suggestions
+	     }
+	 },
+	 getStock() {
+	     axios
+		 .get('/api/stockFromProduct/' + this.product + '/')
+		 .then(response => {
+		     this.quantity = response.data.quantity
+		 })
+		 .catch(error => {
+		     console.log("There is an error");
+		 })
+	 },
+	 getProduct() {
+	     axios
+		 .get('/api/product/' + this.product + '/')
+		 .then(response => {
+		     this.product_detail = response.data;
+		 })
+		 .catch(error => {
+		     console.log("There is an error");
+		 })
+	     this.getStock()
+	 },
+	 toggleNavbar() {
+	     this.show = !this.show;
+	 },
+     },
+     computed: {
+	 
+     },
+     watch: {
+	 product_search: _.debounce(function(addr) { this.getAddresses4Game(addr) }, 500),
+	 product: _.debounce(function() { this.getProduct() }, 500),
+     }
+ });
+</script>
+{% endblock %}

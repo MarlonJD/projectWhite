@@ -1,0 +1,62 @@
+{% extends 'main/_layout.html' %}
+{% load i18n %}
+{% load bootstrap_pagination %}
+
+{% block content %}
+<div class="container" id="vue">
+    <div class="row">
+	<div class="col-12">
+	    <h1>{% trans "Stocks" %}</h1>
+	</div>
+
+	<div class="table-responsive table-hover">
+	  <table class="table">
+	    <caption>{% trans "List of stocks" %}</caption>
+	    <thead>
+	      <tr>
+		  <th scope="col">{% trans "Name" %}</th>
+		  <th scope="col">{% trans "Price" %}</th>
+		  <th scope="col">{% trans "Last Modification" %}</th>
+		<th scope="col">{% trans "Quantity" %}</th>
+                <th scope="col">{% trans "Action" %}</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+		{% for stock in object_list %}
+		<tr>
+		    <td>{{ stock.product.name }}</td>
+		    <td>{{ stock.product.price }}€</td>
+		    <td>{{ stock.last_mod|date }}</td>
+		    <td>{{ stock.quantity }}</td>
+                <td>
+		  <a class="btn btn-sm btn-outline-info" href="/stock/{{ stock.pk }}/"><i class="fas fa-eye"></i></a>
+                </td>
+	      </tr>
+	      {% endfor %}
+	    </tbody>
+	  </table>
+	</div>
+	
+        <h5 class="float-right"><nav aria-label="Page navigation example">
+	  <div class="pagination float-right">
+	    {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" url_view_name='main:index-page' %}
+	  </div>
+	</nav>
+	</h5>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+ app = new Vue({
+     el: '#vue',
+     delimiters: ['[[', ']]'],
+     data: {
+	 
+     },
+     methods: {
+	
+     }
+ })
+</script>
+{% endblock %}

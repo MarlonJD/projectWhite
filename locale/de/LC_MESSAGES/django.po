@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-16 01:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main/models.py:18
+msgid "Stock"
+msgstr "Bestandsmenge"
+
+#: main/models.py:19 templates/main/index.html:9
+msgid "Stocks"
+msgstr "Lagermengen"
+
+#: main/models.py:44
+msgid "Product"
+msgstr "Produkt"
+
+#: main/models.py:45
+msgid "Products"
+msgstr "Produkte"
+
+#: project/settings.py:142
+msgid "English"
+msgstr ""
+
+#: project/settings.py:143
+msgid "German"
+msgstr ""
+
+#: templates/main/_navbar.html:13
+msgid "Home"
+msgstr "Startseite"
+
+#: templates/main/_navbar.html:16
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: templates/main/index.html:14
+msgid "List of stocks"
+msgstr "Liste der Bestandsmengen"
+
+#: templates/main/index.html:17
+msgid "Name"
+msgstr "Name"
+
+#: templates/main/index.html:18
+msgid "Price"
+msgstr "Preis"
+
+#: templates/main/index.html:19
+msgid "Last Modification"
+msgstr "Letzte Änderung"
+
+#: templates/main/index.html:20
+msgid "Quantity"
+msgstr "Menge"
+
+#: templates/main/index.html:21
+msgid "Action"
+msgstr "Aktion"
