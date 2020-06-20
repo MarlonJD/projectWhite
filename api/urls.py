@@ -12,4 +12,5 @@ router.register(r'stockFromProduct', views.StockFromProductViewSet,
 urlpatterns = [
     path('', include(router.urls)),
     path('loadProduct/<key>/', views.loadProductsAPIView.as_view()),
+    path('searchProduct/', views.searchProduct.as_view())
 ]

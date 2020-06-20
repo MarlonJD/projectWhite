@@ -28,11 +28,22 @@ class Stock(models.Model):
         self.save(update_fields=['quantity'])
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     """Product Model. Product(name, price)
     """
     name = models.CharField(max_length=200, unique=True)
-    price = models.PositiveIntegerField()
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 null=True,
+                                 blank=True)
+    price = models.FloatField()
     create_date = models.DateTimeField(auto_now_add=True)
     last_mod = models.DateTimeField(auto_now=True)
 

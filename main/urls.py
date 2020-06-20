@@ -5,7 +5,7 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.StockListView.as_view(), name='index'),
-    path('stock/change/', views.StockChangePage.as_view(), name='stock-change'),
-    path('stock/<page>/', views.StockListView.as_view(),
-         name="index-page"),
+    path('stock/add/', views.StockAddPage.as_view(), name='stock-add'),
+    path('stock/remove', views.StockRemovePage.as_view(), name='stock-remove'),
+    path('stock/<page>/', views.StockListView.as_view(), name="index-page"),
 ]

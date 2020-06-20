@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
 	<meta charset="utf-8" />
 	<title>{% block title %}{% endblock %}</title>
@@ -8,8 +8,6 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta name="theme-color" content="#2C79F2">
 	<meta name="apple-mobile-web-app-status-bar-style" content="#2C79F2">
-	<meta name="yandex-verification" content="065ba182ae4e9d81" />
-	<meta name="msvalidate.01" content="D2F178DFEC73F16A8B7408B0E3B8B955" />
 	{% block metaTags %}
 	{% endblock %}
 
@@ -48,6 +46,23 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
 
 	<script>
+	 function getCookie(name) {
+	     if (!document.cookie) {
+		 return null;
+	     }
+
+	     const xsrfCookies = document.cookie.split(';')
+					 .map(c => c.trim())
+					 .filter(c => c.startsWith(name + '='));
+
+	     if (xsrfCookies.length === 0) {
+		 return null;
+	     }
+	     return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+	 }
+
+	 const csrfToken = getCookie('csrftoken');
+	 
 	 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 
 	 const GAMES_API_URL = '/api/loadGames/:query/'
