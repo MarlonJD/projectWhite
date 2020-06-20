@@ -1,9 +1,10 @@
 # from django.shortcuts import render
 from django.views.generic import (ListView, TemplateView)
+from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.contrib.auth.decorators import login_required
-# from django.urls import reverse_lazy
-from .models import Stock, Category
+from django.urls import reverse_lazy
+from .models import Stock, Category, Recipt
 # from django.http import JsonResponse
 # from django.http import HttpResponseRedirect
 # import json
@@ -14,6 +15,13 @@ class StockListView(LoginRequiredMixin, ListView):
     model = Stock
     paginate_by = 20
     template_name = 'main/index.html'
+
+
+class ReciptListView(LoginRequiredMixin, ListView):
+    "Main Recipt Page"
+    model = Recipt
+    paginate_by = 20
+    template_name = 'main/recipt_list.html'
 
 
 class StockAddPage(LoginRequiredMixin, TemplateView):
@@ -36,3 +44,14 @@ class StockRemovePage(LoginRequiredMixin, TemplateView):
 
 class ProductPage(LoginRequiredMixin, TemplateView):
     template_name = 'main/product.html'
+
+
+class ReciptCreate(LoginRequiredMixin, CreateView):
+    template_name = 'main/add_recipt.html'
+    model = Recipt
+    fields = '__all__'
+    success_url = reverse_lazy('main:success-recipt')
+
+
+class ReciptSuccess(LoginRequiredMixin, TemplateView):
+    template_name = 'main/success_recipt.html'

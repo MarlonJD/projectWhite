@@ -2,32 +2,34 @@
 {% load i18n %}
 {% load bootstrap_pagination %}
 
-{% block title %}Anasayfa{% endblock %}
+{% block title %}Faturalar{% endblock %}
 
 {% block content %}
 <div class="container" id="vue">
     <div class="row">
 	<div class="col-12">
-	    <h1>{% trans "Stocks" %}</h1>
+	    <h1>{% trans "Recipts" %}</h1>
 	</div>
 
 	<div class="table-responsive table-hover">
 	  <table class="table">
-	    <caption>{% trans "List of stocks" %}</caption>
+	    <caption>{% trans "List of Recipts" %}</caption>
 	    <thead>
 	      <tr>
 		  <th scope="col">{% trans "Name" %}</th>
-		  <th scope="col">{% trans "Last Modification" %}</th>
-		<th scope="col">{% trans "Quantity" %}</th>
-                <!-- <th scope="col">{% trans "Action" %}</th> -->
+		  <th scope="col">{% trans "Create Date" %}</th>
+		  <th scope="col">{% trans "Description" %}</th>
+		  <th scope="col">{% trans "Price" %}</th>
+                  <!-- <th scope="col">{% trans "Action" %}</th> -->
 	      </tr>
 	    </thead>
 	    <tbody>
-		{% for stock in object_list %}
+		{% for recipt in object_list %}
 		<tr>
-		    <td>{{ stock.product.name }}</td>
-		    <td>{{ stock.last_mod|date }}</td>
-		    <td>{{ stock.quantity }}</td>
+		    <td>{{ recipt.name }}</td>
+		    <td>{{ recipt.create_date|date }}</td>
+		    <td>{{ recipt.description }}</td>
+		    <td>{{ recipt.price }} €</td>
 	      </tr>
 	      {% endfor %}
 	    </tbody>
@@ -36,7 +38,7 @@
 	
         <h5 class="float-right"><nav aria-label="Page navigation example">
 	  <div class="pagination float-right">
-	    {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" url_view_name='main:index-page' %}
+	    {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" url_view_name='main:recipt-list-page' %}
 	  </div>
 	</nav>
 	</h5>

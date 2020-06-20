@@ -1,0 +1,17 @@
+{% extends 'main/_layout.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}Stok Ekleme{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+	<div class="col-12">
+	    <h1>{% trans "New recipt has been saved" %}</h1>
+	    <a href="{% url 'main:add-recipt' %}">Add new recipt</a> or
+	    <a href="{% url 'main:index' %}">Go to homepage</a>
+	</div>
+    </div>
+</div>
+{% endblock %}

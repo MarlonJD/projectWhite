@@ -17,7 +17,13 @@
 		</li>
 		<li class="nav-item">
 		    <a class="nav-link" href="{% url 'main:stock-remove' %}"><i class="fas fa-weight-hanging"></i> {% trans "Remove" %}</a>
-		</li>	
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="{% url 'main:add-recipt' %}"><i class="fas fa-receipt"></i> {% trans "Add Recipt" %}</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="{% url 'main:recipt-list' %}"><i class="fas fa-receipt"></i> {% trans "Recipt List" %}</a>
+		</li>
 		{% if user.is_authenticated %}
 		<b-dropdown variant="link" toggle-class="nav-link" no-caret>
 		    <template slot="button-content"><i class="fas fa-user-circle"></i> {{ user.username }} <i class="fas fa-chevron-down text-minify"></i></template>

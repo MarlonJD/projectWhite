@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-20 16:34+0000\n"
+"POT-Creation-Date: 2020-06-20 17:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,16 +26,16 @@ msgstr "Ürün bulunamadı"
 msgid "Stock"
 msgstr "Stok"
 
-#: main/models.py:19 templates/main/index.html:9
+#: main/models.py:19 templates/main/index.html:11
 msgid "Stocks"
 msgstr "Stoklar"
 
-#: main/models.py:55 templates/main/add_stock.html:24
-#: templates/main/remove_stock.html:13 templates/main/stock_change.html:13
+#: main/models.py:54 templates/main/add_stock.html:26
+#: templates/main/remove_stock.html:27 templates/main/stock_change.html:13
 msgid "Product"
 msgstr "Ürün"
 
-#: main/models.py:56
+#: main/models.py:55
 msgid "Products"
 msgstr "Ürünler"
 
@@ -57,84 +57,112 @@ msgstr "Ekle"
 
 #: templates/main/_navbar.html:19
 msgid "Remove"
-msgstr ""
+msgstr "Sil"
 
-#: templates/main/add_stock.html:9 templates/main/remove_stock.html:9
-#: templates/main/stock_change.html:9
-msgid "Change Stock"
-msgstr "Stok Değiştirin"
+#: templates/main/_navbar.html:22 templates/main/add_recipt.html:11
+msgid "Add Recipt"
+msgstr "Fatura Ekle"
 
-#: templates/main/add_stock.html:13
-msgid "Category"
-msgstr "Kategori"
+#: templates/main/_navbar.html:25
+msgid "Recipt List"
+msgstr "Fatura Listesi"
 
-#: templates/main/add_stock.html:15
-msgid "Select Category..."
-msgstr "Kategori Seçin"
-
-#: templates/main/add_stock.html:31 templates/main/add_stock.html:32
-#: templates/main/remove_stock.html:20 templates/main/remove_stock.html:21
-#: templates/main/stock_change.html:20 templates/main/stock_change.html:21
-msgid "Search Product"
-msgstr "Ürün arayın"
-
-#: templates/main/add_stock.html:36 templates/main/remove_stock.html:25
-#: templates/main/stock_change.html:25
-msgid "Product Details"
-msgstr "Ürün Detayları"
-
-#: templates/main/add_stock.html:37 templates/main/index.html:17
-#: templates/main/remove_stock.html:26 templates/main/stock_change.html:26
-msgid "Name"
-msgstr "İsim"
-
-#: templates/main/add_stock.html:38 templates/main/index.html:18
-#: templates/main/remove_stock.html:27 templates/main/stock_change.html:27
-msgid "Price"
-msgstr "Fiyat"
-
-#: templates/main/add_stock.html:39 templates/main/index.html:20
-#: templates/main/remove_stock.html:28 templates/main/stock_change.html:28
-msgid "Quantity"
-msgstr "Miktar"
-
-#: templates/main/add_stock.html:43 templates/main/remove_stock.html:32
-#: templates/main/stock_change.html:32
-msgid "Change Quantity"
-msgstr "Miktar Değiştirin"
-
-#: templates/main/add_stock.html:44 templates/main/remove_stock.html:33
-#: templates/main/stock_change.html:33
-msgid "Type Quantity"
-msgstr "Miktar Girin"
-
-#: templates/main/add_stock.html:48 templates/main/remove_stock.html:36
-#: templates/main/stock_change.html:37
-msgid "Clear Form"
-msgstr "Formu Temizle"
-
-#: templates/main/add_stock.html:49 templates/main/stock_change.html:39
-msgid "Increase"
-msgstr "Arttır"
-
-#: templates/main/add_stock.html:134 templates/main/remove_stock.html:108
-#: templates/main/remove_stock.html:122 templates/main/stock_change.html:111
+#: templates/main/add_recipt.html:98 templates/main/add_stock.html:135
+#: templates/main/remove_stock.html:134 templates/main/stock_change.html:111
 #: templates/main/stock_change.html:125
 msgid "Item quantity successfully changed"
 msgstr "Ürün miktarı başarıyla değiştirildi."
 
-#: templates/main/index.html:14
+#: templates/main/add_stock.html:11 templates/main/remove_stock.html:11
+#: templates/main/stock_change.html:9
+msgid "Change Stock"
+msgstr "Stok Değiştirin"
+
+#: templates/main/add_stock.html:15 templates/main/remove_stock.html:15
+msgid "Category"
+msgstr "Kategori"
+
+#: templates/main/add_stock.html:17 templates/main/remove_stock.html:17
+msgid "Select Category..."
+msgstr "Kategori Seçin"
+
+#: templates/main/add_stock.html:33 templates/main/add_stock.html:34
+#: templates/main/remove_stock.html:34 templates/main/remove_stock.html:35
+#: templates/main/stock_change.html:20 templates/main/stock_change.html:21
+msgid "Search Product"
+msgstr "Ürün arayın"
+
+#: templates/main/add_stock.html:38 templates/main/remove_stock.html:39
+#: templates/main/stock_change.html:25
+msgid "Product Details"
+msgstr "Ürün Detayları"
+
+#: templates/main/add_stock.html:39 templates/main/index.html:19
+#: templates/main/recipt_list.html:19 templates/main/remove_stock.html:40
+#: templates/main/stock_change.html:26
+msgid "Name"
+msgstr "İsim"
+
+#: templates/main/add_stock.html:40 templates/main/index.html:21
+#: templates/main/remove_stock.html:41 templates/main/stock_change.html:28
+msgid "Quantity"
+msgstr "Miktar"
+
+#: templates/main/add_stock.html:44 templates/main/remove_stock.html:45
+#: templates/main/stock_change.html:32
+msgid "Change Quantity"
+msgstr "Miktar Değiştirin"
+
+#: templates/main/add_stock.html:45 templates/main/remove_stock.html:46
+#: templates/main/stock_change.html:33
+msgid "Type Quantity"
+msgstr "Miktar Girin"
+
+#: templates/main/add_stock.html:49 templates/main/remove_stock.html:49
+#: templates/main/stock_change.html:37
+msgid "Clear Form"
+msgstr "Formu Temizle"
+
+#: templates/main/add_stock.html:50 templates/main/stock_change.html:39
+msgid "Increase"
+msgstr "Arttır"
+
+#: templates/main/index.html:16
 msgid "List of stocks"
 msgstr "Stok listesi"
 
-#: templates/main/index.html:19
+#: templates/main/index.html:20
 msgid "Last Modification"
 msgstr "Son Düzenleme"
 
-#: templates/main/index.html:21
+#: templates/main/index.html:22 templates/main/recipt_list.html:23
 msgid "Action"
 msgstr "Eylem"
 
-#: templates/main/remove_stock.html:37 templates/main/stock_change.html:38
+#: templates/main/recipt_list.html:11
+msgid "Recipts"
+msgstr "Faturalar"
+
+#: templates/main/recipt_list.html:16
+msgid "List of Recipts"
+msgstr "Fatura listesi"
+
+#: templates/main/recipt_list.html:20
+msgid "Create Date"
+msgstr "Oluşturma Tarihi"
+
+#: templates/main/recipt_list.html:21
+msgid "Description"
+msgstr "Açıklama"
+
+#: templates/main/recipt_list.html:22 templates/main/stock_change.html:27
+msgid "Price"
+msgstr "Fiyat"
+
+#: templates/main/remove_stock.html:50 templates/main/stock_change.html:38
 msgid "Decrease"
 msgstr "Azalt"
+
+#: templates/main/success_recipt.html:11
+msgid "New recipt has been saved"
+msgstr "Yeni fatura başarıyla kaydedildi"
