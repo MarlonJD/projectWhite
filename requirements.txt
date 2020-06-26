@@ -5,7 +5,7 @@ Pillow>=7.0.0
 django-bootstrap-pagination>=1.7.1
 # sendgrid-django
 # django-cookie-consent
-python-dotenv
+# python-dotenv
 
 # Google Drive
 # django-googledrive-storage
