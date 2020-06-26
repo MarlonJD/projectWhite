@@ -35,9 +35,9 @@ except KeyError:
     # Change this
 
 if DEBUG:
-    ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'kkspro.de']
+    ALLOWED_HOSTS = ['.elasticbeanstalk.com', '127.0.0.1', '.kkspro.de', ]
 else:
-    ALLOWED_HOSTS = ['.herokuapp.com', 'kkspro.de']
+    ALLOWED_HOSTS = ['.elasticbeanstalk.com', '.kkspro.de']
 
 
 # Application definition
