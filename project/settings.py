@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'crispy_forms',
     'rest_framework',
+    'rest_framework.authtoken',
     'bootstrap_pagination',
     'api.apps.ApiConfig',
     'main.apps.MainConfig',
