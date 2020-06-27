@@ -12,9 +12,10 @@ router.register(r'stockFromProduct',
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('loadProduct/<key>/', views.loadProductsAPIView.as_view()),
-    path('searchProduct/', views.searchProduct.as_view()),
     path('api-token-auth/',
          rest_views.obtain_auth_token,
          name='api-token-auth'),
+    path('loadProduct/<key>/', views.loadProductsAPIView.as_view()),
+    path('searchProduct/', views.searchProduct.as_view()),
+    path('getUserDetail/', views.UserDetailsAPIView.as_view()),
 ]

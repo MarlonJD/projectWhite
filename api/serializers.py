@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from main.models import Stock, Product
+from django.contrib.auth.models import User
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -17,3 +18,10 @@ class StockSerializer(serializers.ModelSerializer):
         model = Stock
         fields = '__all__'
         depth = 2
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'is_staff', 'first_name', 'last_name']
+        read_only_fields = ['username', 'is_staff']

@@ -2,10 +2,13 @@
 from .permissions import IsAdminUser
 # from django.contrib.admin.views.decorators import staff_member_required
 from rest_framework.viewsets import ModelViewSet
-from .serializers import StockSerializer, ProductSerializer
+from .serializers import (StockSerializer, ProductSerializer,
+                          UserDetailSerializer)
 from main.models import Stock, Product, Category
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.generics import RetrieveAPIView
+from django.contrib.auth.models import User
 
 
 class loadProductsAPIView(APIView):
@@ -79,3 +82,11 @@ class ProductViewSet(ModelViewSet):
     ]
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+
+
+class UserDetailsAPIView(RetrieveAPIView):
+    model = User
+    serializer_class = UserDetailSerializer
+
+    def get_object(self):
+        return self.request.user
