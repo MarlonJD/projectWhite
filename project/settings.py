@@ -34,7 +34,7 @@ except KeyError:
     # Change this
 
 if DEBUG:
-    ALLOWED_HOSTS = ['.elasticbeanstalk.com', '127.0.0.1', '.kkspro.de', ]
+    ALLOWED_HOSTS = ['.elasticbeanstalk.com', '127.0.0.1', '.kkspro.de', '192.168.1.50']
 else:
     ALLOWED_HOSTS = ['.elasticbeanstalk.com', '.kkspro.de']
 

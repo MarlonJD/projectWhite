@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 
 class Stock(models.Model):
@@ -66,3 +67,40 @@ class Recipt(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Shift(models.Model):
+    date = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE,
+                             related_name='shift_set',
+                             blank=True,
+                             null=True)
+    check_in = models.ForeignKey('CheckIn',
+                                 on_delete=models.CASCADE,
+                                 default=None,
+                                 null=True,
+                                 blank=True)
+    check_out = models.ForeignKey('CheckOut',
+                                  on_delete=models.CASCADE,
+                                  default=None,
+                                  null=True,
+                                  blank=True)
+
+
+class CheckIn(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE,
+                             related_name='checkin_set',
+                             blank=True,
+                             null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+class CheckOut(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE,
+                             related_name='checkout_set',
+                             blank=True,
+                             null=True)
+    date = models.DateTimeField(auto_now_add=True)

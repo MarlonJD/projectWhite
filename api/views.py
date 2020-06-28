@@ -2,13 +2,18 @@
 from .permissions import IsAdminUser
 # from django.contrib.admin.views.decorators import staff_member_required
 from rest_framework.viewsets import ModelViewSet
+from rest_framework import mixins
+from rest_framework.viewsets import GenericViewSet
 from .serializers import (StockSerializer, ProductSerializer,
-                          UserDetailSerializer)
-from main.models import Stock, Product, Category
+                          UserDetailSerializer, CheckInSerializer,
+                          CheckOutSerializer, ShiftSerializer)
+from main.models import (Stock, Product, Category, CheckIn, CheckOut,
+                         Shift)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
+from rest_framework.authentication import TokenAuthentication
 
 
 class loadProductsAPIView(APIView):
@@ -87,6 +92,31 @@ class ProductViewSet(ModelViewSet):
 class UserDetailsAPIView(RetrieveAPIView):
     model = User
     serializer_class = UserDetailSerializer
+    authentication_classes = [TokenAuthentication]
 
     def get_object(self):
         return self.request.user
+
+
+class CheckInViewSet(mixins.CreateModelMixin, GenericViewSet):
+    model = CheckIn
+    serializer_class = CheckInSerializer
+
+    def get_queryset(self):
+        return CheckIn.objects.filter(user=self.request.user)
+
+
+class CheckOutViewSet(mixins.CreateModelMixin, GenericViewSet):
+    model = CheckOut
+    serializer_class = CheckOutSerializer
+
+    def get_queryset(self):
+        return CheckIn.objects.filter(user=self.request.user)
+
+
+class ShiftViewSet(mixins.ListModelMixin, GenericViewSet):
+    model = Shift
+    serializer_class = ShiftSerializer
+
+    def get_queryset(self):
+        return Shift.objects.filter(user=self.request.user)

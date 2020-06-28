@@ -9,6 +9,9 @@ router.register(r'product', views.ProductViewSet, basename='products')
 router.register(r'stockFromProduct',
                 views.StockFromProductViewSet,
                 basename='stock_from_product')
+router.register(r'checkIn', views.CheckInViewSet, basename='checkIn')
+router.register(r'checkOut', views.CheckOutViewSet, basename='checkOut')
+router.register(r'shift', views.ShiftViewSet, basename='shift')
 
 urlpatterns = [
     path('', include(router.urls)),
