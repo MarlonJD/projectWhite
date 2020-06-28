@@ -75,6 +75,7 @@ class StockViewSet(ModelViewSet):
         IsAdminUser,
     ]
     serializer_class = StockSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Stock.objects.all()
 
 
