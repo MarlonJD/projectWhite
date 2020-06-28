@@ -7,13 +7,13 @@ from rest_framework.viewsets import GenericViewSet
 from .serializers import (StockSerializer, ProductSerializer,
                           UserDetailSerializer, CheckInSerializer,
                           CheckOutSerializer, ShiftSerializer)
-from main.models import (Stock, Product, Category, CheckIn, CheckOut,
-                         Shift)
+from main.models import (Stock, Product, Category, CheckIn, CheckOut, Shift)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import (TokenAuthentication,
+                                           SessionAuthentication)
 
 
 class loadProductsAPIView(APIView):
@@ -101,6 +101,7 @@ class UserDetailsAPIView(RetrieveAPIView):
 class CheckInViewSet(mixins.CreateModelMixin, GenericViewSet):
     model = CheckIn
     serializer_class = CheckInSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_queryset(self):
         return CheckIn.objects.filter(user=self.request.user)
@@ -109,6 +110,7 @@ class CheckInViewSet(mixins.CreateModelMixin, GenericViewSet):
 class CheckOutViewSet(mixins.CreateModelMixin, GenericViewSet):
     model = CheckOut
     serializer_class = CheckOutSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_queryset(self):
         return CheckIn.objects.filter(user=self.request.user)
@@ -117,6 +119,7 @@ class CheckOutViewSet(mixins.CreateModelMixin, GenericViewSet):
 class ShiftViewSet(mixins.ListModelMixin, GenericViewSet):
     model = Shift
     serializer_class = ShiftSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_queryset(self):
         return Shift.objects.filter(user=self.request.user)
