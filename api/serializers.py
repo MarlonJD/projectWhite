@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from main.models import (Stock, Product, CheckIn, CheckOut, Shift)
+from main.models import (Stock, Product, CheckIn, CheckOut, Shift,
+                         Category)
 from django.contrib.auth.models import User
 from datetime import date, datetime
 from django.utils.timezone import get_current_timezone
@@ -138,3 +139,15 @@ class ShiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shift
         fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+
+
+class ProductByCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name']

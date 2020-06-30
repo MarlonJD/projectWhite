@@ -12,6 +12,7 @@ router.register(r'stockFromProduct',
 router.register(r'checkIn', views.CheckInViewSet, basename='checkIn')
 router.register(r'checkOut', views.CheckOutViewSet, basename='checkOut')
 router.register(r'shift', views.ShiftViewSet, basename='shift')
+router.register(r'category', views.CategoryViewSet, basename='category')
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -21,4 +22,6 @@ urlpatterns = [
     path('loadProduct/<key>/', views.loadProductsAPIView.as_view()),
     path('searchProduct/', views.searchProduct.as_view()),
     path('getUserDetail/', views.UserDetailsAPIView.as_view()),
+    path('productByCategory/<category>/',
+         views.ProductByCategoryAPIView.as_view())
 ]
