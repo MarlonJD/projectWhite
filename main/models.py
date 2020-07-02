@@ -62,7 +62,7 @@ class Recipt(models.Model):
     name = models.CharField(max_length=200)
     number = models.CharField(max_length=50)
     price = models.FloatField()
-    description = models.TextField(max_length=500)
+    description = models.TextField(max_length=500, null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
