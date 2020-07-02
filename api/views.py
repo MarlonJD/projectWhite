@@ -17,6 +17,8 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView
 from django.contrib.auth.models import User
 from rest_framework.authentication import (TokenAuthentication,
                                            SessionAuthentication)
+from datetime import datetime
+from django.utils.timezone import get_current_timezone
 
 
 class loadProductsAPIView(APIView):
@@ -129,7 +131,8 @@ class ShiftViewSet(mixins.ListModelMixin, GenericViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_queryset(self):
-        return Shift.objects.filter(user=self.request.user)
+        return Shift.objects.filter(user=self.request.user,
+                                    date=datetime.now(tz=get_current_timezone()))
 
 
 class CategoryViewSet(mixins.ListModelMixin, GenericViewSet):
