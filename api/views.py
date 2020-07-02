@@ -7,8 +7,10 @@ from rest_framework.viewsets import GenericViewSet
 from .serializers import (StockSerializer, ProductSerializer,
                           UserDetailSerializer, CheckInSerializer,
                           CheckOutSerializer, ShiftSerializer,
-                          CategorySerializer, ProductByCategorySerializer)
-from main.models import (Stock, Product, Category, CheckIn, CheckOut, Shift)
+                          CategorySerializer, ProductByCategorySerializer,
+                          ReciptSerializer)
+from main.models import (Stock, Product, Category, CheckIn, CheckOut, Shift,
+                         Recipt)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView, ListAPIView
@@ -89,7 +91,7 @@ class ProductViewSet(ModelViewSet):
         IsAdminUser,
     ]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    
+
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
@@ -135,6 +137,10 @@ class CategoryViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = CategorySerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
 
+    permission_classes = [
+        IsAdminUser,
+    ]
+
     def get_queryset(self):
         return Category.objects.all()
 
@@ -144,6 +150,10 @@ class ProductByCategoryAPIView(ListAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     lookup_field = 'category'
 
+    permission_classes = [
+        IsAdminUser,
+    ]
+
     def get_queryset(self):
         try:
             category_obj = Category.objects.get(pk=self.kwargs['category'])
@@ -151,3 +161,16 @@ class ProductByCategoryAPIView(ListAPIView):
             category_obj = None
         finally:
             return Product.objects.filter(category=category_obj)
+
+
+class ReciptViewSet(ModelViewSet):
+    """
+    Recipt API
+    """
+    permission_classes = [
+        IsAdminUser,
+    ]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+
+    serializer_class = ReciptSerializer
+    queryset = Recipt.objects.all()

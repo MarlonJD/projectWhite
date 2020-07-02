@@ -17,13 +17,6 @@ class StockListView(LoginRequiredMixin, ListView):
     template_name = 'main/index.html'
 
 
-class ReciptListView(LoginRequiredMixin, ListView):
-    "Main Recipt Page"
-    model = Recipt
-    paginate_by = 20
-    template_name = 'main/recipt_list.html'
-
-
 class StockAddPage(LoginRequiredMixin, TemplateView):
     template_name = 'main/add_stock.html'
 
@@ -51,6 +44,13 @@ class ReciptCreate(LoginRequiredMixin, CreateView):
     model = Recipt
     fields = '__all__'
     success_url = reverse_lazy('main:success-recipt')
+
+
+class ReciptListView(LoginRequiredMixin, ListView):
+    "Main Recipt Page"
+    model = Recipt
+    paginate_by = 20
+    template_name = 'main/recipt_list.html'
 
 
 class ReciptSuccess(LoginRequiredMixin, TemplateView):

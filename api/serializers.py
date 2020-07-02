@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from main.models import (Stock, Product, CheckIn, CheckOut, Shift,
-                         Category)
+                         Category, Recipt)
 from django.contrib.auth.models import User
 from datetime import date, datetime
 from django.utils.timezone import get_current_timezone
@@ -151,3 +151,9 @@ class ProductByCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'name']
+
+
+class ReciptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipt
+        fields = '__all__'

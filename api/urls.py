@@ -13,6 +13,7 @@ router.register(r'checkIn', views.CheckInViewSet, basename='checkIn')
 router.register(r'checkOut', views.CheckOutViewSet, basename='checkOut')
 router.register(r'shift', views.ShiftViewSet, basename='shift')
 router.register(r'category', views.CategoryViewSet, basename='category')
+router.register(r'recipt', views.ReciptViewSet, basename='recipt')
 
 urlpatterns = [
     path('', include(router.urls)),
