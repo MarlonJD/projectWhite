@@ -24,7 +24,10 @@
 		<li class="nav-item">
 		    <a class="nav-link" href="{% url 'main:recipt-list' %}"><i class="fas fa-receipt"></i> {% trans "Recipt List" %}</a>
 		</li>
-		{% if user.is_authenticated %}
+		<li class="nav-item">
+		    <a class="nav-link" href="{% url 'main:shift-list' %}"><i class="fas fa-briefcase"></i> {% trans "Shift List" %}</a>
+		</li>
+		{% if user.is_staff %}
 		<b-dropdown variant="link" toggle-class="nav-link" no-caret>
 		    <template slot="button-content"><i class="fas fa-user-circle"></i> {{ user.username }} <i class="fas fa-chevron-down text-minify"></i></template>
 

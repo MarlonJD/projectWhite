@@ -14,6 +14,7 @@ router.register(r'checkOut', views.CheckOutViewSet, basename='checkOut')
 router.register(r'shift', views.ShiftViewSet, basename='shift')
 router.register(r'category', views.CategoryViewSet, basename='category')
 router.register(r'recipt', views.ReciptViewSet, basename='recipt')
+router.register(r'shifts', views.AllShiftViewSet, basename='shifts')
 
 urlpatterns = [
     path('', include(router.urls)),

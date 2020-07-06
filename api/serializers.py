@@ -141,6 +141,16 @@ class ShiftSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AllShiftSerializer(serializers.ModelSerializer):
+    user = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    check_in = serializers.SlugRelatedField(slug_field='date', read_only=True)
+    check_out = serializers.SlugRelatedField(slug_field='date', read_only=True)
+
+    class Meta:
+        model = Shift
+        fields = '__all__'
+
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category

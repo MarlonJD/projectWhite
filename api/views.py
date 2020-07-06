@@ -8,7 +8,7 @@ from .serializers import (StockSerializer, ProductSerializer,
                           UserDetailSerializer, CheckInSerializer,
                           CheckOutSerializer, ShiftSerializer,
                           CategorySerializer, ProductByCategorySerializer,
-                          ReciptSerializer)
+                          ReciptSerializer, AllShiftSerializer)
 from main.models import (Stock, Product, Category, CheckIn, CheckOut, Shift,
                          Recipt)
 from rest_framework.views import APIView
@@ -177,3 +177,15 @@ class ReciptViewSet(ModelViewSet):
 
     serializer_class = ReciptSerializer
     queryset = Recipt.objects.all()
+
+
+class AllShiftViewSet(mixins.ListModelMixin, GenericViewSet):
+    model = Shift
+    serializer_class = AllShiftSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [
+        IsAdminUser,
+    ]
+
+    def get_queryset(self):
+        return Shift.objects.all()

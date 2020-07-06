@@ -68,6 +68,9 @@ class Recipt(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['-create_date']
+
 
 class Shift(models.Model):
     date = models.DateField(auto_now_add=True)
@@ -86,6 +89,9 @@ class Shift(models.Model):
                                   default=None,
                                   null=True,
                                   blank=True)
+
+    class Meta:
+        ordering = ['-date']
 
 
 class CheckIn(models.Model):

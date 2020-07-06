@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-20 17:40+0000\n"
+"POT-Creation-Date: 2020-07-06 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: api/views.py:20 api/views.py:41
+#: api/views.py:33 api/views.py:54
 msgid "Product does not exist"
 msgstr "Ürün bulunamadı"
 
-#: main/models.py:18
+#: main/models.py:19
 msgid "Stock"
 msgstr "Stok"
 
-#: main/models.py:19 templates/main/index.html:11
+#: main/models.py:20 templates/main/index.html:11
 msgid "Stocks"
 msgstr "Stoklar"
 
-#: main/models.py:54 templates/main/add_stock.html:26
+#: main/models.py:55 templates/main/add_stock.html:26
 #: templates/main/remove_stock.html:27 templates/main/stock_change.html:13
 msgid "Product"
 msgstr "Ürün"
 
-#: main/models.py:55
+#: main/models.py:56
 msgid "Products"
 msgstr "Ürünler"
 
-#: project/settings.py:142
+#: project/settings.py:138
 msgid "English"
 msgstr ""
 
-#: project/settings.py:143
+#: project/settings.py:139
 msgid "Türkçe"
 msgstr ""
 
@@ -66,6 +66,10 @@ msgstr "Fatura Ekle"
 #: templates/main/_navbar.html:25
 msgid "Recipt List"
 msgstr "Fatura Listesi"
+
+#: templates/main/_navbar.html:28 templates/main/shifts.html:11
+msgid "Shift List"
+msgstr "Vardiya Listesi"
 
 #: templates/main/add_recipt.html:98 templates/main/add_stock.html:135
 #: templates/main/remove_stock.html:134 templates/main/stock_change.html:111

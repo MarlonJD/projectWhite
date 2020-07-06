@@ -1,0 +1,155 @@
+{% extends 'main/_layout.html' %}
+{% load i18n %}
+{% load bootstrap_pagination %}
+
+{% block title %}Vardiyalar{% endblock %}
+
+{% block content %}
+<div class="container" id="vue">
+    <div class="row">
+	<div class="col-12">
+	    <h1>{% trans "Shift List" %}</h1>
+	</div>
+
+	<div class="col-3">
+	    <b-form-datepicker v-model="minDate" class="mb-2" placeholder="Başlangıç"></b-form-datepicker>
+	</div>
+	<div class="col-3">
+	    <b-form-datepicker v-model="maxDate" class="mb-2" placeholder="Bitiş"></b-form-datepicker>
+	</div>
+	<div class="col-3">
+	    <input type="search" class="form-control" v-model="search" placeholder="Kullanıcı Adı">
+	</div>
+	<div class="col-3">
+	    <button type="button" class="btn btn-danger" @click="remove_filter()">Filtreyi Sil</button>
+	</div>
+
+
+	<b-table
+	    :items="filterShifts"
+	    :fields="fields"
+	    :sort-by.sync="sortBy"
+	    :sort-desc.sync="sortDesc"
+	    :filter="search"
+	    :filter-included-fields=['user']
+	>
+	    <template v-slot:cell(check_in)="data">
+		[[ data.item.check_in | formatDate ]]
+	    </template>
+
+	    <template v-slot:cell(check_out)="data">
+		[[ data.item.check_out | formatDate ]]
+	    </template>
+	</b-table>
+
+	<div class="col-12">
+	    <strong>Toplam Çalışma Süresi</strong>: [[ getTotal ]]</div>
+	<div class="col-12">
+	    <strong>Hesaplanmış Maaş</strong>: € [[ workingHour*9,75 ]] ([[ workingHour ]] x € 9,75)
+	</div>
+
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+<script>
+ Vue.filter('formatDate', function(value) {
+     if (value) {
+	 return moment(String(value)).format('MM/DD/YYYY hh:mm')
+     }
+ });
+ 
+ app = new Vue({
+     el: '#vue',
+     delimiters: ['[[', ']]'],
+     data: {
+	 removeFilter: false,
+	 workingHour: null,
+	 search: null,
+	 minDate: "",
+	 maxDate: "",
+	 sortBy: 'age',
+         sortDesc: false,
+	 items2: [],
+         fields: [
+             { key: 'user', sortable: true,
+	       label: 'Kullanıcı'},
+             { key: 'check_in', sortable: true,
+	       label: 'İşe Giriş'},
+             { key: 'check_out', sortable: true,
+	       label: 'İşten Çıkış'},
+             { key: 'date', sortable: false,
+	       label: 'Tarih'}
+         ],
+         items: []
+     },
+     methods: {
+	 getShifts() {
+             axios
+		 .get('/api/shifts/')
+		 .then(response => {
+		     this.items = response.data;
+		     console.log(response.data)
+		 })
+		 .catch(error => {
+		     console.log("Error: ", error);
+		     return false
+		 })
+	 },
+	 remove_filter() {
+	     this.minDate = "";
+	     this.maxDate = "";
+	     this.search = null;
+	 },
+     },
+     mounted() {
+	 this.getShifts();
+     },
+     computed: {
+	 filterShifts: function() {
+	     let filtered = this.items;
+	     if (this.minDate && this.maxDate) {
+		 let start = new Date(this.minDate);
+		 let end   = new Date(this.maxDate);
+
+		 filtered = this.items.filter(m => {
+		     let date = new Date(m.date);
+		     return date >= start && date <= end;
+		 });
+		 
+	     }
+	     return filtered;
+	 },
+	 getTotal: function() {
+	     if (this.filterShifts.length < 1) { return; }
+	     let duration = null;
+	     this.filterShifts.forEach(function(item) {
+		 let start = new Date(item.check_out).getTime();
+		 let end   = new Date(item.check_in).getTime();
+
+		 let diff = start - end;
+		 duration += diff;
+	     })
+
+	     var sec = Math.floor(duration/1000);
+	     var mins = Math.floor(sec / 60);
+	     var hrs = Math.floor(mins / 60);
+	     var days = Math.floor(hrs / 24);
+	     var yrs = Math.floor(days / 365);
+
+	     mins = mins % 60;
+	     sec = sec % 60;
+
+	     this.workingHour = hrs;
+	     
+	     if (mins > 30) {
+		 this.workingHour + 1;
+	     }
+
+	     return hrs + " Saat " + mins + " Dakika " + sec + " Saniye";
+	 }
+     }
+ })
+</script>
+{% endblock %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('recipt/success/',
          views.ReciptSuccess.as_view(),
          name='success-recipt'),
+    path('shifts/', views.ShiftAPIView.as_view(), name="shift-list")
 ]
