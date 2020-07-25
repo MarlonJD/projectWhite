@@ -1,24 +1,31 @@
 from rest_framework import serializers
-from main.models import (Stock, Product, CheckIn, CheckOut, Shift,
-                         Category, Recipt)
+from main.models import (CheckIn, CheckOut, Shift,
+                         Category, Recipt, ZReport)
 from django.contrib.auth.models import User
-from datetime import date, datetime
+from datetime import datetime
 from django.utils.timezone import get_current_timezone
 
 
-class ProductSerializer(serializers.ModelSerializer):
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ['id', 'name']
+#         read_only_fields = ['create_date', 'last_mod']
+
+
+# class StockSerializer(serializers.ModelSerializer):
+#     product = ProductSerializer(read_only=True)
+
+#     class Meta:
+#         read_only_fields = ['create_date', 'last_mod']
+#         model = Stock
+#         fields = '__all__'
+#         depth = 2
+
+
+class ZReportSerilalizer(serializers.ModelSerializer):
     class Meta:
-        model = Product
-        fields = ['id', 'name']
-        read_only_fields = ['create_date', 'last_mod']
-
-
-class StockSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
-
-    class Meta:
-        read_only_fields = ['create_date', 'last_mod']
-        model = Stock
+        model = ZReport
         fields = '__all__'
         depth = 2
 
@@ -157,10 +164,10 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class ProductByCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ['id', 'name']
+# class ProductByCategorySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ['id', 'name']
 
 
 class ReciptSerializer(serializers.ModelSerializer):

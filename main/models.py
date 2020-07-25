@@ -56,6 +56,12 @@ class Product(models.Model):
         verbose_name_plural = _('Products')
 
 
+class ZReport(models.Model):
+    bon_number = models.CharField(max_length=100)
+    price = models.FloatField()
+    image = models.ImageField()
+
+
 class Recipt(models.Model):
     """Recipt Model()
     """
@@ -64,6 +70,7 @@ class Recipt(models.Model):
     price = models.FloatField()
     description = models.TextField(max_length=500, null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField()
 
     def __str__(self):
         return self.name

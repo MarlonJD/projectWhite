@@ -4,13 +4,11 @@ from .permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
-from .serializers import (StockSerializer, ProductSerializer,
-                          UserDetailSerializer, CheckInSerializer,
+from .serializers import (UserDetailSerializer, CheckInSerializer,
                           CheckOutSerializer, ShiftSerializer,
-                          CategorySerializer, ProductByCategorySerializer,
-                          ReciptSerializer, AllShiftSerializer)
-from main.models import (Stock, Product, Category, CheckIn, CheckOut, Shift,
-                         Recipt)
+                          CategorySerializer,
+                          ReciptSerializer, AllShiftSerializer, ZReportSerilalizer)
+from main.models import (CheckIn, CheckOut, Shift, Recipt, ZReport)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView, ListAPIView
@@ -20,82 +18,88 @@ from rest_framework.authentication import (TokenAuthentication,
 from datetime import datetime
 from django.utils.timezone import get_current_timezone
 
+# class loadProductsAPIView(APIView):
+#     # permission_classes = [IsAdminUser]
+#     def get(self, request, *args, **kwargs):
+#         key = self.kwargs['key'].lower()
 
-class loadProductsAPIView(APIView):
-    # permission_classes = [IsAdminUser]
-    def get(self, request, *args, **kwargs):
-        key = self.kwargs['key'].lower()
+#         # Sanity Check
+#         try:
+#             productObj = Product.objects.filter(name__icontains=key)[:10]
+#         except Product.DoesNotExist:
+#             return Response({'Error': _('Product does not exist')}, status=404)
 
-        # Sanity Check
-        try:
-            productObj = Product.objects.filter(name__icontains=key)[:10]
-        except Product.DoesNotExist:
-            return Response({'Error': _('Product does not exist')}, status=404)
+#         jResponse = []
+#         for product in productObj:
+#             jResponse.append({'id': product.pk, 'name': product.name})
 
-        jResponse = []
-        for product in productObj:
-            jResponse.append({'id': product.pk, 'name': product.name})
+#         return Response(jResponse)
 
-        return Response(jResponse)
+# class searchProduct(APIView):
+#     # permission_classes = [IsAdminUser]
+#     def post(self, request, *args, **kwargs):
+#         key = request.data.get('key')
+#         category = request.data.get('category')
+#         category_obj = Category.objects.get(pk=int(category))
+
+#         # Sanity Check
+#         try:
+#             productObj = Product.objects.filter(name__icontains=key,
+#                                                 category=category_obj)[:10]
+#         except Product.DoesNotExist:
+#             return Response({'Error': _('Product does not exist')}, status=404)
+
+#         jResponse = []
+#         for product in productObj:
+#             jResponse.append({'id': product.pk, 'name': product.name})
+
+#         return Response(jResponse)
+
+# class StockFromProductViewSet(ModelViewSet):
+#     """
+#     Stocks API
+#     """
+#     permission_classes = [
+#         IsAdminUser,
+#     ]
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
+#     serializer_class = StockSerializer
+#     lookup_field = 'product'
+#     queryset = Stock.objects.all()
+
+# class StockViewSet(ModelViewSet):
+#     """
+#     Stocks API
+#     """
+#     permission_classes = [
+#         IsAdminUser,
+#     ]
+#     serializer_class = StockSerializer
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
+#     queryset = Stock.objects.all()
+
+# class ProductViewSet(ModelViewSet):
+#     """
+#     Products API
+#     """
+#     permission_classes = [
+#         IsAdminUser,
+#     ]
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
+
+#     serializer_class = ProductSerializer
+#     queryset = Product.objects.all()
 
 
-class searchProduct(APIView):
-    # permission_classes = [IsAdminUser]
-    def post(self, request, *args, **kwargs):
-        key = request.data.get('key')
-        category = request.data.get('category')
-        category_obj = Category.objects.get(pk=int(category))
-
-        # Sanity Check
-        try:
-            productObj = Product.objects.filter(name__icontains=key,
-                                                category=category_obj)[:10]
-        except Product.DoesNotExist:
-            return Response({'Error': _('Product does not exist')}, status=404)
-
-        jResponse = []
-        for product in productObj:
-            jResponse.append({'id': product.pk, 'name': product.name})
-
-        return Response(jResponse)
-
-
-class StockFromProductViewSet(ModelViewSet):
+class ZReportViewSet(ModelViewSet):
     """
-    Stocks API
+    Z-Report API
     """
-    permission_classes = [
-        IsAdminUser,
-    ]
+    permission_classes = [IsAdminUser, ]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    serializer_class = StockSerializer
-    lookup_field = 'product'
-    queryset = Stock.objects.all()
 
-
-class StockViewSet(ModelViewSet):
-    """
-    Stocks API
-    """
-    permission_classes = [
-        IsAdminUser,
-    ]
-    serializer_class = StockSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-    queryset = Stock.objects.all()
-
-
-class ProductViewSet(ModelViewSet):
-    """
-    Products API
-    """
-    permission_classes = [
-        IsAdminUser,
-    ]
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    serializer_class = ZReportSerilalizer
+    queryset = ZReport.objects.all()
 
 
 class UserDetailsAPIView(RetrieveAPIView):
@@ -131,39 +135,40 @@ class ShiftViewSet(mixins.ListModelMixin, GenericViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_queryset(self):
-        return Shift.objects.filter(user=self.request.user,
-                                    date=datetime.now(tz=get_current_timezone()))
+        return Shift.objects.filter(
+            user=self.request.user,
+            date=datetime.now(tz=get_current_timezone()))
 
 
-class CategoryViewSet(mixins.ListModelMixin, GenericViewSet):
-    model = Category
-    serializer_class = CategorySerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+# class CategoryViewSet(mixins.ListModelMixin, GenericViewSet):
+#     model = Category
+#     serializer_class = CategorySerializer
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
 
-    permission_classes = [
-        IsAdminUser,
-    ]
+#     permission_classes = [
+#         IsAdminUser,
+#     ]
 
-    def get_queryset(self):
-        return Category.objects.all()
+#     def get_queryset(self):
+#         return Category.objects.all()
 
 
-class ProductByCategoryAPIView(ListAPIView):
-    serializer_class = ProductByCategorySerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-    lookup_field = 'category'
+# class ProductByCategoryAPIView(ListAPIView):
+#     serializer_class = ProductByCategorySerializer
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
+#     lookup_field = 'category'
 
-    permission_classes = [
-        IsAdminUser,
-    ]
+#     permission_classes = [
+#         IsAdminUser,
+#     ]
 
-    def get_queryset(self):
-        try:
-            category_obj = Category.objects.get(pk=self.kwargs['category'])
-        except:
-            category_obj = None
-        finally:
-            return Product.objects.filter(category=category_obj)
+#     def get_queryset(self):
+#         try:
+#             category_obj = Category.objects.get(pk=self.kwargs['category'])
+#         except:
+#             category_obj = None
+#         finally:
+#             return Product.objects.filter(category=category_obj)
 
 
 class ReciptViewSet(ModelViewSet):
