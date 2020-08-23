@@ -30,7 +30,7 @@ except KeyError:
 try:
     DEBUG = os.environ['DEBUG']
 except KeyError:
-    DEBUG = True
+    DEBUG = False
     # Change this
 
 if DEBUG:
